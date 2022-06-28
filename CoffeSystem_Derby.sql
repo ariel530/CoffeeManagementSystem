@@ -1,0 +1,99 @@
+CREATE TABLE "USERS" (
+  "USERNAME" varchar(300) NOT NULL primary key,
+  "PASSWORD" varchar(300) NOT NULL ,
+  "FIRSTNAME" varchar(300) NOT NULL,
+  "LASTNAME" varchar(300) NOT NULL,
+  "ADDRESS" varchar(500) NOT NULL ,
+  "USERTYPE" varchar(100) NOT NULL,
+  "SALARY" double default 0
+);
+
+
+
+INSERT INTO USERS VALUES
+('admin1', 'admin1', 'Sara', 'Ahmad', 'Street 214, Madinah', 'EMPLOYEE',800),
+('admin', 'admin', 'Ahmad', 'Ali', 'Street 214, Riyadh', 'EMPLOYEE',1000);
+
+
+
+CREATE TABLE "ITEMCATEGORY" (
+  "ID" int NOT NULL primary key
+        GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),
+  "NAME" varchar(100) NOT NULL
+  
+);
+
+
+
+INSERT INTO "ITEMCATEGORY" ( name) VALUES
+( 'Coffee'),
+( 'Sweets');
+
+
+
+
+CREATE TABLE MENU (
+  ID int NOT NULL primary key
+        GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),
+  "NAME" varchar(100) NOT NULL ,
+  SMALLSIZEPRICE double NOT NULL default 0,
+  MEDIUMSIZEPRICE double NOT NULL default 0 ,
+  LARGESIZEPRICE double NOT NULL default 0 ,
+  IMAGEPATH varchar(200) NOT NULL,
+  ITEMCATEGORYID int NOT NULL 
+);
+
+
+
+CREATE TABLE ORDERPAYMENT (
+  ID int NOT NULL   primary key
+        GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),
+  ORDERID int NOT NULL,
+  CARDNUMBER varchar(200) DEFAULT NULL,
+  CCVNUMBER varchar(15) DEFAULT NULL,
+  EXPMONTH varchar(10) DEFAULT NULL,
+  EXPYEAR varchar(10) DEFAULT NULL,
+  ADDRESS varchar(200) DEFAULT NULL
+);
+
+
+CREATE TABLE ORDERS (
+   ID int NOT NULL   primary key
+        GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),
+  USERNAME varchar(50) NOT NULL,
+  TOTALPRICE double NOT NULL,
+  DATE varchar(100) NOT NULL 
+);
+
+
+
+CREATE TABLE ORDERDETAILS (
+  ID int NOT NULL    primary key
+        GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),
+  ORDERID int NOT NULL,
+  MENUID int NOT NULL ,
+  QTY int NOT NULL,
+ITEMSIZE varchar(30) NOT NULL,
+TOTALPRICE double NOT NULL
+);
+
+
+
+
+
+
+CREATE TABLE REVIEWS (
+  ID int NOT NULL    primary key
+        GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),
+  ORDERID int NOT NULL,
+  MENUREVIEW  varchar(30)  NOT NULL ,
+  DELIVERYREVIEW  varchar(30)  NOT NULL,
+APPLICATIONREVIEW varchar(30) NOT NULL,
+NOTES  varchar(300) 
+);
